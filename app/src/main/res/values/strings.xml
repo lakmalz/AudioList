@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">AudioList</string>
+    <string name="audio_play_broadcaster">lk.lakmalz.audiolist.play_broadcast</string>
+
+    <string-array name="alarm_file_names">
+        <item>Alarm 1</item>
+        <item>Alarm 2</item>
+        <item>Alarm 3</item>
+        <item>Alarm 4</item>
+        <item>Alarm 5</item>
+    </string-array>
+
+</resources>
