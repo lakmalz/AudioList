@@ -8,7 +8,6 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
@@ -190,13 +189,10 @@ public class MainActivity extends AppCompatActivity implements AudioFilesAdapter
 
     @Override
     public void onClickPlay(int currentProgress, int position) {
-        //if (mMediaPlayer.isPlaying()) {
-            //mMediaPlayer.stop();
-            if (currentPosition != -1) {
-                updateAdapter(currentPosition, mMediaPlayer.getCurrentPosition(), STOPED, 0);
-                mAdapter.notifyDataSetChanged();
-            }
-        //}
+        if (currentPosition != -1) {
+            updateAdapter(currentPosition, mMediaPlayer.getCurrentPosition(), STOPED, 0);
+            mAdapter.notifyDataSetChanged();
+        }
 
         startPlay(position, currentProgress);
     }

@@ -92,7 +92,6 @@ public class AudioFilesAdapter extends RecyclerView.Adapter<AudioFilesAdapter.Vi
 
                     case MainActivity.STOPED:
                         updateStop(args);
-                        Log.i(TAG, "status" + status);
                         break;
 
                     case MainActivity.PLAYED_SELECTED:
@@ -130,12 +129,11 @@ public class AudioFilesAdapter extends RecyclerView.Adapter<AudioFilesAdapter.Vi
 
                 if (audioId != -1) {
                     if (audioId == _audioId) {
-                        Log.i(TAG, "updateProgress: audioId"+audioId);
                         mProgressBar.setProgress(_progress);
                         imgBtnPlay.setImageResource(R.drawable.ic_pause);
                         isPlaying = true;
                         progress = _progress;
-                        Log.i(TAG, "updateProgress: "+getAdapterPosition());
+
                         if (getAdapterPosition() != -1) {
                             mDataSet.get(getAdapterPosition()).progress = progress;
                         }
@@ -147,19 +145,6 @@ public class AudioFilesAdapter extends RecyclerView.Adapter<AudioFilesAdapter.Vi
                 }
             }
 
-            private void updatePlayedSelected(Intent args) {
-
-                int _audioId = args.getIntExtra(MainActivity.ARG_POSITION, 0);
-
-                if (audioId != -1) {
-                    if (audioId == _audioId) {
-                        mProgressBar.setProgress(0);
-                        imgBtnPlay.setImageResource(R.drawable.ic_play);
-                        isPlaying = false;
-                    }
-                }
-            }
-
         }
     }
 
@@ -167,13 +152,10 @@ public class AudioFilesAdapter extends RecyclerView.Adapter<AudioFilesAdapter.Vi
     private Context context;
     private AudioFileAdapterCallback mCallback;
     private final List<AudioFile> mDataSet;
-    private int defaultPosition = 0;
-    private Activity mActivity;
 
     public AudioFilesAdapter(Context _context, Activity activity, List<AudioFile> myDataset) {
         mDataSet = myDataset;
         context = _context;
-        mActivity = activity;
         mCallback = (AudioFileAdapterCallback) context;
     }
 
@@ -189,16 +171,10 @@ public class AudioFilesAdapter extends RecyclerView.Adapter<AudioFilesAdapter.Vi
         holder.tvName.setText(audioFile.name);
         holder.initReceiver(position);
         holder.mProgressBar.setProgress(audioFile.progress);
-        Log.i(TAG, "onBindViewHolder: "+holder.progress);
         holder.imgBtnPlay.setImageResource(R.drawable.ic_play);
         holder.tvName.setTextColor(Color.BLACK);
         holder.isPlaying = false;
 
-        if (defaultPosition == position) {
-            defaultPosition = -1;
-            holder.mProgressBar.setProgress(0);
-            //holder.tvName.setTextColor(Color.WHITE);
-        }
     }
 
     @Override
